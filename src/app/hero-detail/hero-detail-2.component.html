@@ -1,0 +1,9 @@
+<h2>Form with formGroup</h2>
+
+<form [formGroup]="heroForm" novalidate>
+  <div class="form-group">
+      <label>Name:<input type="text" class="form-control" formControlName="name"></label>
+  </div>
+</form>
+
+<p>{{heroForm.value | json}}</p>

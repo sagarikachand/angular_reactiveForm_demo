@@ -1,0 +1,46 @@
+<div class="container">
+     <div>
+       <h1>Reactive forms</h1>
+       <h4><i>Pick a Demo :</i>
+        <!-- Let the intitial selected demo be demo minus 1. Because demo starts from 1 and index starts from 0 -->
+        <select [selectedIndex]="demo - 1" (change)="changedChoice($event.target.selectedIndex)">
+          <option *ngFor="let choice of choices" >{{choice}}</option>
+        </select></h4>
+       
+     </div>
+
+     <div>
+        <div *ngIf="demo==final">
+            <app-hero-list></app-hero-list>
+         </div>
+       <div *ngIf="demo==1">
+          <app-hero-detail-1></app-hero-detail-1>
+       </div>
+       <div *ngIf="demo==2">
+          <app-hero-detail-2></app-hero-detail-2>
+       </div>
+       <div *ngIf="demo==3">
+          <app-hero-detail-3></app-hero-detail-3>
+       </div>
+       <div *ngIf="demo==4">
+          <app-hero-detail-4></app-hero-detail-4>
+       </div>
+       <div *ngIf="demo==5">
+          <app-hero-detail-5></app-hero-detail-5>
+       </div>
+
+       <div *ngIf="demo>=6 && demo!==final">
+          <div *ngIf="isLoading"><i>Loading Heros...</i></div>
+          <div *ngIf="!isLoading">
+            <h2> Select a hero</h2>
+            <nav>
+              <a class="btn btn-primary" (click)="resetHero()" >Refresh</a>
+              <a class="btn btn-primary" (click)="selectHero(hero)" *ngFor="let hero of heros">{{hero.name}}</a>
+            </nav>
+            <div *ngIf="selectedHero && demo==6"><app-hero-detail-6 [hero]="selectedHero" ></app-hero-detail-6></div>
+            <div *ngIf="selectedHero && demo==7"><app-hero-detail-7 [hero]="selectedHero" ></app-hero-detail-7></div>
+            <div *ngIf="selectedHero && demo==8"><app-hero-detail-8 [hero]="selectedHero" ></app-hero-detail-8></div>
+          </div>
+       </div>
+     </div>
+</div>

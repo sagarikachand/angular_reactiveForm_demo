@@ -1,0 +1,67 @@
+<h2></h2>
+
+<form [formGroup]="heroForm" novalidate (ngSubmit)="onSave()">
+  <button type="submit" class="btn btn-success" [disabled]="heroForm.pristine">SAVE</button>
+  <button type="button" class="btn btn-danger" [disabled]="heroForm.pristine" (click)="revert()">REVERT</button>
+  <div class="form-group">
+    <label class="center-block">Name:
+      <input type="text" class="form-control" formControlName="name" id="name">
+    </label>
+    <div *ngIf="name.invalid && (name.touched || name.dirty)">
+      <div *ngIf="name.errors.required"> Name is required</div>
+      <div *ngIf="name.errors.minlength"> Name must be atleast 3 letters long</div>
+    </div>
+  </div>
+  <div formArrayName="secretLiars" class="well">
+    <div *ngFor="let address of secretLiars.controls ; let i =index" [formGroupName]="i">
+        <h4>Address #{{i + 1}}</h4>
+      <div class="form-group">
+        <label class="center-block">Street:
+          <input type="text" class="form-control" formControlName="street">
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="center-block">City:
+          <input type="text" class="form-control" formControlName="city">
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="center-block">State:
+          <select class="form-control" formControlName="state">
+            <option *ngFor="let state of states" [value]="state">{{state}}
+
+            </option>
+          </select>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Zip:
+          <input type="text" class="form-control" formControlName="zip">
+        </label>
+      </div>
+      <br>
+    </div>
+   <button type="button" (click)="addLiar()" class="btn">Add a secret Liar</button>
+  </div>
+
+  <h4>Super Power</h4>
+  <div class="form-group radio">
+
+    <label class="center-block">
+      <input type="radio" formControlName="power" value="flight">Flight</label>
+    <label class="center-block">
+      <input type="radio" formControlName="power" value="x-ray vision">X-ray vision</label>
+    <label class="center-block">
+      <input type="radio" formControlName="power" value="strength">Strength</label>
+  </div>
+  <div class="form-group checkbox">
+    <label class="center-block">
+      <input type="checkbox" formControlName="sidekick">I have a sideKick
+    </label>
+  </div>
+</form>
+
+<p>{{heroForm.value | json}}</p>
+<p>{{heroForm.status | json }}</p>
+<p>{{heroForm.get('name').value}}</p>

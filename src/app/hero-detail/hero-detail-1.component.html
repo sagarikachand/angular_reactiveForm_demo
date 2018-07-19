@@ -1,0 +1,12 @@
+<h2>Simple formControl Element</h2>
+
+<label>Name: 
+  <input type="text" [formControl]="name" class="form-control">  </label>
+
+
+  <div class="well"> 
+    Status: {{name.status}}
+    Value:{{name.value}}
+    prinstine:{{name.pristine}}
+    parent : {{ name.parent}}
+  </div> 
